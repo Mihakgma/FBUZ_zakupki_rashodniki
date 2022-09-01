@@ -3,6 +3,7 @@ from sheeet_names import sheets_dict
 from dfs_templates_file import get_df_templates
 from save_dfs_excel_sheets_file import SaveDataFrames
 from DFProcessing import extract_dfs, summarize_dfs
+from DFTransformator import DFtransformator
 
 
 # файл для процессинга всех файлов
@@ -21,6 +22,15 @@ if __name__ == "__main__":
     if files_format_ok:
         extracted_dfs = extract_dfs(files_lst=file_paths,
                                     sheet_names=sheets)
+        #print(list(extracted_dfs))
+
+        # Трансформация ДФ для поиска выбросов
+        # Начало участка
+
+        DFtransformator(extracted_dfs).transform_dfs()
+
+        # Конец участка
+
         templates = get_df_templates()
 
         result_df_dict = summarize_dfs(extracted_dfs, sheets, templates)

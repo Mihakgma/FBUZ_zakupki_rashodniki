@@ -20,8 +20,6 @@ def extract_dfs(files_lst:list,
     for curr_file_path in files_lst:
         dfs_dict[curr_file_path] = {}
         print(curr_file_path)
-        #short_filename = curr_file_path[curr_file_path.rfind('\\')+1:-5]
-        #print(short_filename)
         for sheet in sheet_names:
             temp_df = excel_to_data_frame_parser(file=curr_file_path,
                                                  sheet_name=sheet,
@@ -108,11 +106,12 @@ def summarize_dfs(dfs_dict:dict, sheet_names:list, df_templates:dict):
     for file in dfs_dict:
         short_filename = file[file.rfind('\\') + 1:-5]
         print(short_filename)
-        if start_flag:
+        if start_flag: # выполняется один раз
             start_flag = False
             for sheet in sheet_names:
                 basic_df = dfs_dict[file][sheet]
                 rownames_values = basic_df.iloc[:,:2]
+                #print(rownames_values)
                 df_verify[sheet] = rownames_values
                 #print(rownames_values)
                 basic_df = basic_df.iloc[:,2:]
