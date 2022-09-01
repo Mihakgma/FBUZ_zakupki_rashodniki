@@ -124,6 +124,17 @@ class OutliersSearcher():
         print(result_dict)
         return result_dict
 
+    def auto_process(self):
+        colnames_there = self.check_searched_colnames()
+        print(colnames_there)  # выводим на печать результат проверки наличия всех столбцов в ДФ
+        types_ok = self.check_values_type()  # проверяем типы данных во всех колонках - цифровые или нет
+        print(types_ok)
+        if colnames_there and types_ok:
+            for column_name in column_names_tested:
+                column_values = list(df_tested[column_name])
+                print(column_name)
+                return self.detect_outliers_IQR_method(column_values)
+
     def save_found_outliers(self):
         """
         Сохраняет в виде текстового документа (?)
@@ -133,7 +144,6 @@ class OutliersSearcher():
         pass
 
 
-
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     df_tested = pd_DataFrame(df_outliers_test)
@@ -141,12 +151,5 @@ if __name__ == '__main__':
     test_object = OutliersSearcher(
         df_in=df_tested,
         column_names=column_names_tested)
-    colnames_there = test_object.check_searched_colnames()
-    print(colnames_there) # выводим на печать результат проверки наличия всех столбцов в ДФ
-    types_ok = test_object.check_values_type() # проверяем типы данных во всех колонках - цифровые или нет
-    print(types_ok)
-    if colnames_there and types_ok:
-        for column_name in column_names_tested:
-            column_values = list(df_tested[column_name])
-            print(column_name)
-            test_object.detect_outliers_IQR_method(column_values)
+    test_object.auto_process()
+
