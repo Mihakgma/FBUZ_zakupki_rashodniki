@@ -25,19 +25,22 @@ if __name__ == "__main__":
         #print(list(extracted_dfs))
 
         # Трансформация ДФ для поиска выбросов
+        ###
         # Начало участка
-
         # ЗАКОММЕНТИРОВАТЬ!!! - для работы в штатном режиме
         #transformed_dfs = DFtransformator(extracted_dfs).transform_dfs()
-        #SaveDataFrames(dfs_dict=transformed_dfs).save_excel_file()
-
+        #print(transformed_dfs)
+        #SaveDataFrames(dfs_dict=transformed_dfs['ИФА']).save_excel_file()
+        ###
         # Конец участка
 
         templates = get_df_templates()
 
         result_df_dict = summarize_dfs(extracted_dfs, sheets, templates)
+        ###
         # РАЗКОММЕНТИРОВАТЬ!!! - для работы в штатном режиме
         SaveDataFrames(dfs_dict=result_df_dict).save_excel_file()
+        ###
 
         #print(result_df_dict[sheets[0]].head(15))
         #print(result_df_dict[sheets[1]].head(15))

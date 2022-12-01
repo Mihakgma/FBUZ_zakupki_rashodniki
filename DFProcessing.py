@@ -52,7 +52,7 @@ def smart_fillna(df, str_cols_lst, num_col_lst):
     return df
 
 def add_file_name_to_str(text:str, filename:str, divider:str=';'):
-    text = text.replace('/=', '')
+    text = str(text).replace('/=', '')
     text_refined = str(text).strip()
     out_text = text
     if len(text_refined) > 0:
